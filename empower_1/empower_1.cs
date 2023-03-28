@@ -49,14 +49,16 @@ dd/mm/2023	1.0.0.1		XXX, Skyline	Initial version
 ****************************************************************************
 */
 
-namespace empower_1
+namespace Empower_1
 {
 	using System;
 	using System.Collections.Generic;
 	using System.Globalization;
 	using System.Text;
 	using Skyline.DataMiner.Automation;
-	
+	using Skyline.DataMiner.Core.DataMinerSystem.Automation;
+	using Skyline.DataMiner.Core.DataMinerSystem.Common;
+
 	/// <summary>
 	/// Represents a DataMiner Automation script.
 	/// </summary>
@@ -69,6 +71,16 @@ namespace empower_1
 		public void Run(IEngine engine)
 		{
 			engine.GenerateInformation("Hello World");
+
+			IDms thisDMS = engine.GetDms();
+
+			var elements = thisDMS.GetElements();
+
+			foreach ( var element in elements )
+			{
+				engine.GenerateInformation(element.Name);
+
+			}
 		}
 	}
 }
